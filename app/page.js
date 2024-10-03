@@ -2,94 +2,41 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
+
+  const key = process.env.API_KEY;
+  const name = "seaz%20test%20acc";
+  const tag = "EUW";
+  fetch(getAccountUrl(name, tag, key))
+  .then(response=>response.json())
+  .then(data=>{
+    const puuid = data.puuid;
+    fetch(getMatchHistoryUrl(puuid, key))
+    .then(response => response.json())
+    .then(async data=>{
+      fetch(getMatchUrl(data[0], key))
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+    })
+  });
+
+  
+
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      
     </div>
   );
+}
+function getAccountUrl(name, tag, key){
+  return `https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${name}/${tag}?api_key=${key}`
+}
+function getMatchHistoryUrl(puuid, key){
+         
+  return `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=${key}`
+}
+function getMatchUrl(matchId, key){
+         'https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_7136863878?api_key=RGAPI-31540a6d-b037-46cc-8fbf-43e51b9a3bee'
+  return `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${key}`
 }
