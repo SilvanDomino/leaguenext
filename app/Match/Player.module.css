@@ -1,0 +1,13 @@
+.player{
+    display: grid;
+    grid-template-columns: 200px 100px 50px 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    width: fit-content;
+    padding: 2px 20px;
+}
+.team100{
+    background: rgba(50, 50, 255, 0.3);
+}
+.team200{
+    background: rgba(255, 50, 55, 0.3);
+}

@@ -10,7 +10,7 @@ export default async function Home() {
   // const matchesRes = await lzFetch(getMatchHistoryUrl(playerData.puuid, key));
   // const match = await lzFetch(getMatchUrl(matchesRes[0], key));
   const match = await fetchMatch();
-  console.log(match);
+  // console.log(match);
   
   
   return (
@@ -30,6 +30,5 @@ function getMatchHistoryUrl(puuid, key){
   return `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=${key}`
 }
 function getMatchUrl(matchId, key){
-  console.log(`https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${key}`);
   return `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${key}`
 }
