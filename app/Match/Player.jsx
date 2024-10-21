@@ -1,5 +1,6 @@
 import styles from './Player.module.css';
 import clsx from 'clsx';
+import Image from 'next/image';
 
 export function Player({player}){
 
@@ -25,10 +26,9 @@ export function Player({player}){
                 {player.riotIdGameName}#{player.riotIdTagline}
             </div>
             <div className={styles.championName}>
-                {player.championName}
+                <Image src={`/img/champion/${player.championName}.png`} width={32} height={32}/>
             </div>
             {kda()}
-            {order()}
         </div>
     )
 

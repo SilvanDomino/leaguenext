@@ -4,3 +4,12 @@
     gap: 5px;
     
 }
+
+.matchHeader{
+    height: 20px;
+    background-color: pink;
+    display: grid;
+    width: fit-content;
+    grid-template-columns: var(--match-grid);
+    padding: 2px 20px;
+}
