@@ -1,3 +1,7 @@
+:root{
+  --match-grid: 200px 100px 50px 50px;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

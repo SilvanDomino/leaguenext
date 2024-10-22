@@ -7,6 +7,17 @@ export function Match({matchData}){
             <h2>
                 {matchData.info.gameName}
             </h2>
+            <div className={styles.matchHeader}>
+                <div>
+                    name
+                </div>
+                <div>
+                    champ
+                </div>
+                <div>
+                    kda
+                </div>
+            </div>
             <div className={styles.players}>
                 {matchData.info.participants.map(player=>{
                     return <Player player={player} key={player.puuid}/>

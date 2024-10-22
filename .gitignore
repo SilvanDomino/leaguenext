@@ -35,4 +35,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env
-dragontail-14.20.1.tar
+dragontail-14.20.1.tgz
