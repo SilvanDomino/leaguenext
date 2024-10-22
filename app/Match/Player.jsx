@@ -29,6 +29,12 @@ export function Player({player}){
                 <Image src={`/img/champion/${player.championName}.png`} width={32} height={32}/>
             </div>
             {kda()}
+            <div>
+                {player.goldEarned}$
+            </div>
+            <div>
+                {player.goldEarned}%
+            </div>
         </div>
     )
 
