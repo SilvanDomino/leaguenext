@@ -33,7 +33,7 @@ export function Player({player}){
                 {player.goldEarned}$
             </div>
             <div>
-                {player.goldEarned}%
+                {player.goldShare}%
             </div>
         </div>
     )

@@ -2,12 +2,12 @@ import { Player } from "./Player"
 import styles from './Match.module.css';
 export function Match({matchData}){
     let match = matchData;
-    let metadata = generateMetadata();
+    generateMetadata(match);
 
     return (
         <div>
             <h2>
-                {matchData.info.gameName}
+                {match.info.gameName}
             </h2>
             <div className={styles.matchHeader}>
                 <div>
@@ -27,16 +27,25 @@ export function Match({matchData}){
                 </div>
             </div>
             <div className={styles.players}>
-                {matchData.info.participants.map(player=>{
+                {match.info.participants.map(player=>{
                     return <Player player={player} key={player.puuid}/>
                 })}
             </div>
         </div>
     )
 
-    function generateMetadata(){
-        let total = matchData.info.participants.reduce((total, {goldEarned})=> total+goldEarned, 0);
-        
-        return total;
+    function generateMetadata(match){
+        let totalGold = {100: 0, 200:0};
+        match.info.participants.forEach(element => {
+            totalGold[element.teamId] += element.goldEarned;
+        });
+        match.generated = {};
+        match.generated.totalGold = totalGold;
+        match.info.participants.forEach(element => {
+            let total = totalGold[element.teamId];
+            let percentage = element.goldEarned/total * 100;
+            element.goldShare = parseFloat(percentage).toFixed(2);
+        });
+        return totalGold;
     }
 }
